@@ -32,9 +32,6 @@
 /build/
 /dist/
 
-# VS Code specific files
-/.vscode/
-
 # Maven specific files
 /target/
 /pom.xml.tag
