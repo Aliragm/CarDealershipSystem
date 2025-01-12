@@ -1,0 +1,53 @@
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Generated files
+*.db
+*.lock
+*.bak
+*.swp
+*.tmp
+*.temp
+*.out
+
+# Eclipse specific files
+/.classpath
+/.project
+/.settings/
+
+# IntelliJ IDEA specific files
+/.idea/
+/*.iml
+/out/
+
+# NetBeans specific files
+/nbproject/private/
+/build/
+/dist/
+
+# VS Code specific files
+/.vscode/
+
+# Maven specific files
+/target/
+/pom.xml.tag
+/pom.xml.releaseBackup
+/pom.xml.versionsBackup
+/logs/
+/release.properties
+
+# Gradle specific files
+/.gradle/
+/build/
+/*.lock
+
+# JavaFX specific files
+module-info.class
