@@ -1,8 +1,6 @@
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class App extends javafx.application.Application {
@@ -12,20 +10,11 @@ public class App extends javafx.application.Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("teste");
-
-        Button button = new Button("teste de botão");
-        button.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent arg0) {
-                System.out.println("Clicou no botão");
-            }
-        });
-
-        StackPane root = new StackPane();
-        root.getChildren().addAll(button);
-        primaryStage.setScene(new Scene(root, 300, 250));
-
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginPage.fxml"));
+        Parent root = loader.load();
+        Controller controller = loader.getController();
+        controller.setMainWindow(primaryStage);
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 }
