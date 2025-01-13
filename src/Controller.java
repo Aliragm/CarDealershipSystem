@@ -8,19 +8,21 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.util.Stack;
+
 public class Controller {
 
-    //Geral
-    private String lastFXML;
+    // Geral
+    private Stack<String> fxmlStack = new Stack<>();
 
     private Stage mainWindow;
 
-    public String getLastFXML() {
-        return lastFXML;
+    public void pushToStack(String fxml) {
+        fxmlStack.push(fxml);
     }
 
-    public void setLastFXML(String lastFXML) {
-        this.lastFXML = lastFXML;
+    public String popFromStack() {
+        return fxmlStack.isEmpty() ? null : fxmlStack.pop();
     }
 
     public void setMainWindow(Stage mainWindow) {
@@ -34,19 +36,25 @@ public class Controller {
     @FXML
     void onClickBack(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(lastFXML));
+            String previousFXML = popFromStack();
+            if (previousFXML == null) {
+                System.out.println("Nenhuma página anterior.");
+                return;
+            }
+
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(previousFXML));
             Parent backRoot = loader.load();
 
             Controller backController = loader.getController();
             backController.setMainWindow(mainWindow);
-
+            backController.fxmlStack = this.fxmlStack;
             mainWindow.setScene(new Scene(backRoot));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    //Login
+    // Login
 
     @FXML
     private Button loginButton;
@@ -69,18 +77,18 @@ public class Controller {
 
                 Controller menuController = loader.getController();
                 menuController.setMainWindow(mainWindow);
-
+                menuController.fxmlStack = this.fxmlStack;
+                pushToStack("Login.fxml");
                 mainWindow.setScene(new Scene(menuRoot));
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        else{
+        } else {
             System.out.println("Login inválido");
         }
     }
 
-    //Menu
+    // Menu
 
     @FXML
     private Button carsButton;
@@ -99,8 +107,8 @@ public class Controller {
 
             Controller choiceController = loader.getController();
             choiceController.setMainWindow(mainWindow);
-            choiceController.setLastFXML("Menu.fxml");
-
+            choiceController.fxmlStack = this.fxmlStack;
+            pushToStack("Menu.fxml");
             mainWindow.setScene(new Scene(choiceRoot));
         } catch (Exception e) {
             e.printStackTrace();
@@ -109,15 +117,15 @@ public class Controller {
 
     @FXML
     void onClickClient(ActionEvent event) {
-
+        // Implementar
     }
 
     @FXML
     void onClickEmply(ActionEvent event) {
-
+        // Implementar
     }
 
-    //Escolha showroom ou pátio
+    // Escolha showroom ou pátio
 
     @FXML
     private Button backButton;
@@ -128,14 +136,78 @@ public class Controller {
     @FXML
     private Button showrButton;
 
-
     @FXML
     void onClickReserve(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Reserve.fxml"));
+            Parent reserveRoot = loader.load();
 
+            Controller reserveController = loader.getController();
+            reserveController.setMainWindow(mainWindow);
+            reserveController.fxmlStack = this.fxmlStack;
+            pushToStack("ShowOrReserve.fxml");
+            mainWindow.setScene(new Scene(reserveRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void onClickShowroom(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Showroom.fxml"));
+            Parent showroomRoot = loader.load();
+
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("ShowOrReserve.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Showroom
+
+    @FXML
+    private Button addCarShowButton;
+
+    @FXML
+    private Button removeCarShowButton;
+
+    @FXML
+    private Button sellCarShowButton;
+
+    @FXML
+    void onClickAddCarShow(ActionEvent event) {
+        // Implementar
+    }
+
+    @FXML
+    void onClickSellCarShowButton(ActionEvent event) {
+        // Implementar
+    }
+
+    //Reserva/Pátio
+
+    @FXML
+    private Button addCarReserveButton;
+
+    @FXML
+    private Button removeCarReserveButton;
+
+    @FXML
+    private Button sellCarReserveButton;
+
+    @FXML
+    void onClickAddCarReserve(ActionEvent event) {
 
     }
+
+    @FXML
+    void onClickSellCarReserveButton(ActionEvent event) {
+
+    }
+
 }
