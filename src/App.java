@@ -14,7 +14,6 @@ public class App extends javafx.application.Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("teste");
 
-        // Botão com evento de clique
         Button button = new Button("teste de botão");
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -23,12 +22,10 @@ public class App extends javafx.application.Application {
             }
         });
 
-        // Layout e cena
         StackPane root = new StackPane();
         root.getChildren().addAll(button);
         primaryStage.setScene(new Scene(root, 300, 250));
 
-        // Mostra a janela
         primaryStage.show();
     }
 }
