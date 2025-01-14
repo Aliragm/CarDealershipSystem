@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
@@ -231,7 +232,18 @@ public class Controller {
 
     @FXML
     void onClickAddCarShow(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CarShowroom.fxml"));
+            Parent showroomRoot = loader.load();
 
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Showroom.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -285,7 +297,18 @@ public class Controller {
 
     @FXML
     void onClickAddCarReserve(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CarReserve.fxml"));
+            Parent showroomRoot = loader.load();
 
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Reserve.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -414,12 +437,12 @@ public class Controller {
     private ListView<String> listViewName;
 
     @FXML
-    void initializeChassi(ActionEvent event) {
+    void initializeChassi() {
         listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getChassisShowroom()));
     }
 
     @FXML
-    void initializeName(ActionEvent event) {
+    void initializeName() {
         listViewName.setItems(FXCollections.observableArrayList(gerenciador.getNomesShowroom()));
     }
 
@@ -432,12 +455,12 @@ public class Controller {
     private ListView<String> listViewNameReserva;
 
     @FXML
-    void initializeChassiReserva(ActionEvent event) {
+    void initializeChassiReserva() {
         listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getChassisReserva()));
     }
 
     @FXML
-    void initializeNameReserva(ActionEvent event) {
+    void initializeNameReserva() {
         listViewName.setItems(FXCollections.observableArrayList(gerenciador.getNomesReserva()));
     }
 
@@ -450,12 +473,12 @@ public class Controller {
     private ListView<String> listViewNameClients;
 
     @FXML
-    void initializeCpfClients(ActionEvent event) {
+    void initializeCpfClients() {
         listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getCpfClientes()));
     }
 
     @FXML
-    void initializeNameClients(ActionEvent event) {
+    void initializeNameClients() {
         listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getNomesClientes()));
     }
 
@@ -468,14 +491,140 @@ public class Controller {
     private ListView<String> listViewNameEmply;
 
     @FXML
-    void initializeCpfEmply(ActionEvent event) {
+    void initializeCpfEmply() {
         listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getCpfFuncionarios()));
     }
 
     @FXML
-    void initializeNameEmply(ActionEvent event) {
+    void initializeNameEmply() {
         listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getNomesFuncionarios()));
     }
 
+    //cadastro carro showroom
 
+    @FXML
+    private TextField brandShowroomCar;
+
+    @FXML
+    private TextField chassiCarShowroom;
+
+    @FXML
+    private TextField colorShowroomCar;
+
+    @FXML
+    private TextField horsepowerCarShowroom;
+
+    @FXML
+    private CheckBox isUsedCheckbox;
+
+    @FXML
+    private TextField modelCarShowroom;
+
+    @FXML
+    private Button submitButtonShowroom;
+
+    @FXML
+    private TextField typeCarShowroom;
+
+    @FXML
+    private TextField yearCarShowroom;
+
+    @FXML
+    void onClickButtonSubmitShowroom(ActionEvent event) {
+        try {
+            String marca = brandShowroomCar.getText();
+            String chassi = chassiCarShowroom.getText();
+            String cor = colorShowroomCar.getText();
+            int cavalos = Integer.parseInt(horsepowerCarShowroom.getText());
+            int ano = Integer.parseInt(yearCarShowroom.getText());
+            String tipo = typeCarShowroom.getText();
+            String modelo = modelCarShowroom.getText();
+            boolean isUsado = isUsedCheckbox.isSelected();
+            boolean isShowroom = true;
+
+            gerenciador.cadastroCarro(marca, cor, cavalos, ano, tipo, modelo, isUsado, isShowroom, chassi);
+
+            System.out.println("Carro cadastrado no showroom com sucesso!");
+
+            brandShowroomCar.clear();
+            chassiCarShowroom.clear();
+            colorShowroomCar.clear();
+            horsepowerCarShowroom.clear();
+            yearCarShowroom.clear();
+            typeCarShowroom.clear();
+            modelCarShowroom.clear();
+            isUsedCheckbox.setSelected(false);
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar carro no showroom: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    void usedCheckboxShowroom(ActionEvent event) {
+
+    }
+
+    //cadastro reserva
+
+    @FXML
+    private TextField brandReserveCar;
+
+    @FXML
+    private TextField chassiCarReserve;
+
+    @FXML
+    private TextField colorReserveCar;
+
+    @FXML
+    private TextField horsepowerCarReserve;
+
+    @FXML
+    private CheckBox isUsedCheckboxReserve;
+
+    @FXML
+    private TextField modelCarReserve;
+
+    @FXML
+    private Button submitButtonReserve;
+
+    @FXML
+    private TextField typeCarReserve;
+
+    @FXML
+    private TextField yearCarReserve;
+
+    @FXML
+    void onClickButtonSubmitReserve(ActionEvent event) {
+        try {
+            String marca = brandReserveCar.getText();
+            String chassi = chassiCarReserve.getText();
+            String cor = colorReserveCar.getText();
+            int cavalos = Integer.parseInt(horsepowerCarReserve.getText());
+            int ano = Integer.parseInt(yearCarReserve.getText());
+            String tipo = typeCarReserve.getText();
+            String modelo = modelCarReserve.getText();
+            boolean isUsado = isUsedCheckboxReserve.isSelected();
+            boolean isShowroom = false;
+
+            gerenciador.cadastroCarro(marca, cor, cavalos, ano, tipo, modelo, isUsado, isShowroom, chassi);
+
+            System.out.println("Carro cadastrado na reserva com sucesso!");
+
+            brandReserveCar.clear();
+            chassiCarReserve.clear();
+            colorReserveCar.clear();
+            horsepowerCarReserve.clear();
+            yearCarReserve.clear();
+            typeCarReserve.clear();
+            modelCarReserve.clear();
+            isUsedCheckboxReserve.setSelected(false);
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar carro na reserva: " + e.getMessage());
+        }
+    }
+
+    @FXML
+    void usedCheckboxReserve(ActionEvent event) {
+
+    }
 }
