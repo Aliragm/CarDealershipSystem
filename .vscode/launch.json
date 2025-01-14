@@ -2,9 +2,11 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Current File",
+            "name": "App",
             "request": "launch",
-            "mainClass": "${file}"
+            "mainClass": "App",
+            "projectName": "CarDealershipSystem_44776c5e",
+            "vmArgs": "--module-path ${workspaceFolder}/lib --add-modules javafx.controls,javafx.fxml"
         },
         {
             "type": "java",
