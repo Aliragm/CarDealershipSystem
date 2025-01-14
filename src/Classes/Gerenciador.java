@@ -1,10 +1,15 @@
 package Classes;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class Gerenciador {
 
-    BancoDAO bancoDeDados = BancoDAO.getInstance();
+    private BancoDAO bancoDeDados = BancoDAO.getInstance();
+
+    public BancoDAO getBancoDeDados() {
+        return bancoDeDados;
+    }
 
     public void cadastroCarro( String marca,  String cor, int cavalos, int ano, String tipo,
      String nome, boolean isUsado, boolean isShowroom, String chassi){
@@ -77,5 +82,83 @@ public class Gerenciador {
         }
     }
 
-    
+    public ArrayList<String> getChassisShowroom(){
+        ArrayList<String> chassis = new ArrayList<>();
+        for (Carro c : bancoDeDados.getCarros()) {
+            if (c.getIsShowroom()){
+                chassis.add(c.getChassi());
+            }   
+        }
+        return chassis;
+    }
+
+    public ArrayList<String> getNomesShowroom(){
+        ArrayList<String> nomes = new ArrayList<>();
+        for (Carro c : bancoDeDados.getCarros()) {
+            if(c.getIsShowroom()){
+                nomes.add(c.getNome());
+            }
+        }
+        return nomes;
+    }
+
+    public ArrayList<String> getChassisReserva(){
+        ArrayList<String> chassis = new ArrayList<>();
+        for (Carro c : bancoDeDados.getCarros()) {
+            if (!c.getIsShowroom()){
+                chassis.add(c.getChassi());
+            }   
+        }
+        return chassis;
+    }
+
+    public ArrayList<String> getNomesReserva(){
+        ArrayList<String> nomes = new ArrayList<>();
+        for (Carro c : bancoDeDados.getCarros()) {
+            if(!c.getIsShowroom()){
+                nomes.add(c.getNome());
+            }
+        }
+        return nomes;
+    }
+
+    public ArrayList<String> getNomesClientes(){
+        ArrayList<String> nomes = new ArrayList<>();
+        for (Pessoa p : bancoDeDados.getPessoas()) {
+            if (p instanceof Cliente) {
+                nomes.add(p.getNome());
+            }
+        }
+        return nomes;
+    }
+
+    public ArrayList<String> getCpfClientes(){
+        ArrayList<String> cpfs = new ArrayList<>();
+        for (Pessoa p : bancoDeDados.getPessoas()) {
+            if (p instanceof Cliente) {
+                cpfs.add(p.getCpf());
+            }
+        }
+        return cpfs;
+    }
+
+    public ArrayList<String> getNomesFuncionarios(){
+        ArrayList<String> nomes = new ArrayList<>();
+        for (Pessoa p : bancoDeDados.getPessoas()) {
+            if (p instanceof Funcionario) {
+                nomes.add(p.getNome());
+            }
+        }
+        return nomes;
+    }
+
+    public ArrayList<String> getCpfFuncionarios(){
+        ArrayList<String> cpfs = new ArrayList<>();
+        for (Pessoa p : bancoDeDados.getPessoas()) {
+            if (p instanceof Funcionario) {
+                cpfs.add(p.getCpf());
+            }
+        }
+        return cpfs;
+    }
 }

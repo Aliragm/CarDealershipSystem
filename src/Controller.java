@@ -1,18 +1,24 @@
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.util.Stack;
 
+import Classes.Gerenciador;
+
 public class Controller {
 
     // Geral
+    private Gerenciador gerenciador = new Gerenciador();
+
     private Stack<String> fxmlStack = new Stack<>();
 
     private Stage mainWindow;
@@ -196,6 +202,9 @@ public class Controller {
     private Button addCarShowButton;
 
     @FXML
+    private Button listCarShowButton1;
+
+    @FXML
     private Button editCarShowButton;
 
     @FXML
@@ -203,6 +212,22 @@ public class Controller {
 
     @FXML
     private Button sellCarShowButton;
+
+    @FXML
+    void onClickListCarShow(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ListShowroom.fxml"));
+            Parent showroomRoot = loader.load();
+
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Showroom.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void onClickAddCarShow(ActionEvent event) {
@@ -234,10 +259,29 @@ public class Controller {
     private Button editCarReserveButton;
 
     @FXML
+    private Button listCarReserveButton;
+
+    @FXML
     private Button removeCarReserveButton;
 
     @FXML
     private Button sellCarReserveButton;
+
+    @FXML
+    void onClickListCarReserve(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ListReserva.fxml"));
+            Parent showroomRoot = loader.load();
+
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Reserve.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void onClickAddCarReserve(ActionEvent event) {
@@ -260,6 +304,9 @@ public class Controller {
     private Button BuyedRegistrationButton;
 
     @FXML
+    private Button listClientButton;
+
+    @FXML
     private Button addClientButton;
 
     @FXML
@@ -267,6 +314,22 @@ public class Controller {
 
     @FXML
     private Button removeClientButton;
+
+    @FXML
+    void onClickListClient(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ListClientes.fxml"));
+            Parent showroomRoot = loader.load();
+
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Cliente.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void onClickAddClient(ActionEvent event) {
@@ -303,6 +366,25 @@ public class Controller {
     private Button removeEmplyButton;
 
     @FXML
+    private Button listEmplyButton;
+
+    @FXML
+    void onClickListEmply(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ListFunc.fxml"));
+            Parent showroomRoot = loader.load();
+
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Emply.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
     void onClickAddEmply(ActionEvent event) {
 
     }
@@ -322,6 +404,78 @@ public class Controller {
 
     }
 
+    //listar showroom
+
+
+    @FXML
+    private ListView<String> listViewChassi;
+
+    @FXML
+    private ListView<String> listViewName;
+
+    @FXML
+    void initializeChassi(ActionEvent event) {
+        listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getChassisShowroom()));
+    }
+
+    @FXML
+    void initializeName(ActionEvent event) {
+        listViewName.setItems(FXCollections.observableArrayList(gerenciador.getNomesShowroom()));
+    }
+
+    //Lista reserva
+
+    @FXML
+    private ListView<String> listViewChassiReserva;
+
+    @FXML
+    private ListView<String> listViewNameReserva;
+
+    @FXML
+    void initializeChassiReserva(ActionEvent event) {
+        listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getChassisReserva()));
+    }
+
+    @FXML
+    void initializeNameReserva(ActionEvent event) {
+        listViewName.setItems(FXCollections.observableArrayList(gerenciador.getNomesReserva()));
+    }
+
+    //Lista clientes
+
+    @FXML
+    private ListView<String> listViewCpfClients;
+
+    @FXML
+    private ListView<String> listViewNameClients;
+
+    @FXML
+    void initializeCpfClients(ActionEvent event) {
+        listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getCpfClientes()));
+    }
+
+    @FXML
+    void initializeNameClients(ActionEvent event) {
+        listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getNomesClientes()));
+    }
+
+    //Lista funcionarios
+
+    @FXML
+    private ListView<String> listViewCpfEmply;
+
+    @FXML
+    private ListView<String> listViewNameEmply;
+
+    @FXML
+    void initializeCpfEmply(ActionEvent event) {
+        listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getCpfFuncionarios()));
+    }
+
+    @FXML
+    void initializeNameEmply(ActionEvent event) {
+        listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getNomesFuncionarios()));
+    }
 
 
 }
