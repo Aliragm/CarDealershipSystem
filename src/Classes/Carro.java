@@ -8,19 +8,19 @@ public class Carro {
     private int ano;
     private String tipo;
     private String nome;
-    private boolean usado;
-    private String localizacao; 
+    private boolean isUsado;
+    private boolean isShowroom; 
     
 
-    public Carro(String marca, String cor, int cavalos, int ano, String tipo, String nome, boolean usado, String localizacao) {
+    public Carro(String marca, String cor, int cavalos, int ano, String tipo, String nome, boolean isUsado, boolean isShowroom) {
         this.marca = marca;
         this.cor = cor;
         this.cavalos = cavalos;
         this.ano = ano;
         this.tipo = tipo;
         this.nome = nome;
-        this.usado = usado;
-        this.localizacao = localizacao;
+        this.isUsado = isUsado;
+        this.isShowroom = isShowroom;
     }
 
     
@@ -73,19 +73,19 @@ public class Carro {
     }
 
     public boolean isUsado() {
-        return usado;
+        return isUsado;
     }
 
-    public void setUsado(boolean usado) {
-        this.usado = usado;
+    public void setIsUsado(boolean isUsado) {
+        this.isUsado = isUsado;
     }
 
-    public String getLocalizacao() {
-        return localizacao;
+    public boolean getIsShowroom() {
+        return isShowroom;
     }
 
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
+    public void setIsShowroom(boolean isShowroom) {
+        this.isShowroom = isShowroom;
     }
 
 }
