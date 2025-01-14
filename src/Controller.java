@@ -117,12 +117,34 @@ public class Controller {
 
     @FXML
     void onClickClient(ActionEvent event) {
-        // Implementar
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Client.fxml"));
+            Parent choiceRoot = loader.load();
+
+            Controller choiceController = loader.getController();
+            choiceController.setMainWindow(mainWindow);
+            choiceController.fxmlStack = this.fxmlStack;
+            pushToStack("Menu.fxml");
+            mainWindow.setScene(new Scene(choiceRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
     void onClickEmply(ActionEvent event) {
-        // Implementar
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("Emply.fxml"));
+            Parent choiceRoot = loader.load();
+
+            Controller choiceController = loader.getController();
+            choiceController.setMainWindow(mainWindow);
+            choiceController.fxmlStack = this.fxmlStack;
+            pushToStack("Menu.fxml");
+            mainWindow.setScene(new Scene(choiceRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     // Escolha showroom ou pátio
@@ -209,5 +231,67 @@ public class Controller {
     void onClickSellCarReserveButton(ActionEvent event) {
 
     }
+
+    //Clientes
+
+    @FXML
+    private Button BuyedRegistrationButton;
+
+    @FXML
+    private Button addClientButton;
+
+    @FXML
+    private Button removeClientButton;
+
+    @FXML
+    void onClickAddClient(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickBuyedRegistrationButton(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickRemoveClient(ActionEvent event) {
+
+    }
+
+    //Funcionarios
+
+    @FXML
+    private Button SelledRegistrationButton;
+
+    @FXML
+    private Button addEmplyButton;
+
+    @FXML
+    private Button editEmplyButton;
+
+    @FXML
+    private Button removeEmplyButton;
+
+    @FXML
+    void onClickAddEmply(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickEditEmply(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickRemoveEmply(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickSelledRegistrationButton(ActionEvent event) {
+
+    }
+
+
 
 }
