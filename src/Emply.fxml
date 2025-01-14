@@ -19,6 +19,6 @@
          <font>
             <Font size="10.0" />
          </font></Button>
-      <Button fx:id="editEmplyButton" layoutX="250.0" layoutY="244.0" mnemonicParsing="false" onAction="#onClickEditEmply" prefHeight="35.0" prefWidth="100.0" text="Editar" />
+      <Button fx:id="editEmplyButton" layoutX="250.0" layoutY="245.0" mnemonicParsing="false" onAction="#onClickEditEmply" prefHeight="35.0" prefWidth="100.0" text="Editar" />
    </children>
 </AnchorPane>

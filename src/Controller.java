@@ -196,6 +196,9 @@ public class Controller {
     private Button addCarShowButton;
 
     @FXML
+    private Button editCarShowButton;
+
+    @FXML
     private Button removeCarShowButton;
 
     @FXML
@@ -203,18 +206,32 @@ public class Controller {
 
     @FXML
     void onClickAddCarShow(ActionEvent event) {
-        // Implementar
+
+    }
+
+    @FXML
+    void onClickEditCarShow(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickRemoveCarShow(ActionEvent event) {
+
     }
 
     @FXML
     void onClickSellCarShowButton(ActionEvent event) {
-        // Implementar
+
     }
+
 
     //Reserva/Pátio
 
     @FXML
     private Button addCarReserveButton;
+
+    @FXML
+    private Button editCarReserveButton;
 
     @FXML
     private Button removeCarReserveButton;
@@ -224,6 +241,11 @@ public class Controller {
 
     @FXML
     void onClickAddCarReserve(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickEditCarReserve(ActionEvent event) {
 
     }
 
@@ -241,6 +263,9 @@ public class Controller {
     private Button addClientButton;
 
     @FXML
+    private Button editClientButton;
+
+    @FXML
     private Button removeClientButton;
 
     @FXML
@@ -250,6 +275,11 @@ public class Controller {
 
     @FXML
     void onClickBuyedRegistrationButton(ActionEvent event) {
+
+    }
+
+    @FXML
+    void onClickEditClient(ActionEvent event) {
 
     }
 
