@@ -16,5 +16,15 @@ public class App extends javafx.application.Application {
         controller.setMainWindow(primaryStage);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        primaryStage.setOnCloseRequest(event -> {
+            try {
+                controller.getGerenciador().encerrarBanco();
+                System.out.println("O programa está fechando...");
+            } catch (Exception e) {
+                System.err.println("Erro ao encerrar o banco: " + e.getMessage());
+                event.consume();
+            }
+        });
+        
     }
 }

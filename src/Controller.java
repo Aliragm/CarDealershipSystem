@@ -42,6 +42,10 @@ public class Controller {
         return mainWindow;
     }
 
+    public Gerenciador getGerenciador() {
+        return gerenciador;
+    }
+
     @FXML
     void onClickBack(ActionEvent event) {
         try {
@@ -92,6 +96,7 @@ public class Controller {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            gerenciador.inicializarBanco();
         } else {
             System.out.println("Login inválido");
         }

@@ -1,5 +1,11 @@
 package Classes;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -161,4 +167,36 @@ public class Gerenciador {
         }
         return cpfs;
     }
+
+    private File diretorio = new File("src/arquivos/banco.prod");
+
+    @SuppressWarnings("unchecked")
+    public void inicializarBanco(){
+        String caminhoRelativo = System.getProperty("user.dir");
+        System.out.println("Caminho relativo atual: " + caminhoRelativo);
+
+        try {
+            FileInputStream arquivo = new FileInputStream(diretorio);
+            ObjectInputStream leitor = new ObjectInputStream(arquivo);
+            getBancoDeDados().getPessoas().addAll((ArrayList<Pessoa>)leitor.readObject());
+            getBancoDeDados().getCarros().addAll((ArrayList<Carro>)leitor.readObject());
+            leitor.close();
+        } catch (ClassNotFoundException | IOException e) {
+            System.out.println("Arquivo de dados nao encontrado, ao sair do programa ele sera criado.");
+        }
+    }
+
+    public void encerrarBanco(){
+        try {
+            FileOutputStream arquivo = new FileOutputStream(diretorio);
+            ObjectOutputStream escritor = new ObjectOutputStream(arquivo);
+            escritor.writeObject(getBancoDeDados().getPessoas());
+            escritor.writeObject(getBancoDeDados().getCarros());
+            escritor.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+
 }
