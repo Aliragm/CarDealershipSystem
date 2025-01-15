@@ -222,4 +222,55 @@ public class Gerenciador {
         
     }
 
+    public Carro buscaCarro(String chassi){
+        Carro carroBuscado = null;
+        for (Carro c : bancoDeDados.getCarros()) {
+            if (c.getChassi().equals(chassi)) {
+                carroBuscado = c;
+            }
+        }
+        if(carroBuscado != null){
+            return carroBuscado;
+        }else{
+            System.out.println("nao ha esse chassi");
+            return null;
+        }
+    }
+
+
+    public Cliente buscaCliente(String cpf){
+        Cliente clienteBuscado = null;
+        for (Pessoa p : bancoDeDados.getPessoas()){
+            if(p instanceof Cliente){
+                if (p.getCpf().equals(cpf)) {
+                    clienteBuscado = (Cliente)p;
+                }
+            }
+        }
+        if (clienteBuscado != null) {
+            return clienteBuscado;
+        }else{
+            System.out.println("nao ha esse cpf");
+            return null;
+        }
+        
+    }
+
+    public Funcionario buscaFuncionario(String cpf){
+        Funcionario funcionarioBuscado = null;
+        for (Pessoa p : bancoDeDados.getPessoas()){
+            if(p instanceof Funcionario){
+                if (p.getCpf().equals(cpf)) {
+                    funcionarioBuscado = (Funcionario)p;
+                }
+            }
+        }
+        if (funcionarioBuscado != null) {
+            return funcionarioBuscado;
+        }else{
+            System.out.println("nao ha esse cpf");
+            return null;
+        }
+        
+    }
 }

@@ -9,12 +9,16 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.Stack;
 
+import Classes.Carro;
+import Classes.Cliente;
+import Classes.Funcionario;
 import Classes.Gerenciador;
 
 public class Controller {
@@ -255,7 +259,18 @@ public class Controller {
 
     @FXML
     void onClickEditCarShow(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("searchCar.fxml"));
+            Parent showroomRoot = loader.load();
 
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Showroom.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -342,7 +357,18 @@ public class Controller {
 
     @FXML
     void onClickEditCarReserve(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("searchCar.fxml"));
+            Parent showroomRoot = loader.load();
 
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Reserve.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -411,16 +437,16 @@ public class Controller {
     }
 
     @FXML
-    public void onClickAddClient(ActionEvent event) {
+    public void onClickAddClientNew(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ClientRegistry.fxml"));
-            Parent addClientRoot = loader.load();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ClientRegistryNew.fxml"));
+            Parent showroomRoot = loader.load();
 
-            Controller addClientController = loader.getController();
-            addClientController.setMainWindow(mainWindow);
-            addClientController.fxmlStack = this.fxmlStack;
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
             pushToStack("Client.fxml");
-            mainWindow.setScene(new Scene(addClientRoot));
+            mainWindow.setScene(new Scene(showroomRoot));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -503,7 +529,18 @@ public class Controller {
 
     @FXML
     void onClickEditEmply(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("searchEmply.fxml"));
+            Parent showroomRoot = loader.load();
 
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Emply.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -910,6 +947,125 @@ public class Controller {
         String cpfEmply = cpfEmplySellShowroom.getText();
 
         gerenciador.venderCarro(cpfEmply, cpfClient, chassi);
+    }
+
+    //busca carro
+    @FXML
+    private TextArea ano;
+
+    @FXML
+    private TextArea cavalos;
+
+    @FXML
+    private TextField chassiSearch;
+
+    @FXML
+    private TextArea cor;
+
+    @FXML
+    private TextArea marca;
+
+    @FXML
+    private TextArea nomeCarro;
+
+    @FXML
+    private Button searchButtonCar;
+
+    @FXML
+    private TextArea showroom;
+
+    @FXML
+    private TextArea tipo;
+
+    @FXML
+    private TextArea usado;
+
+    @FXML
+    void onClickButtonSearchCar(ActionEvent event) {
+        String chassi = chassiSearch.getText();
+        Carro achado = gerenciador.buscaCarro(chassi);
+        marca.setText(achado.getMarca());
+        cor.setText(achado.getCor());
+        cavalos.setText(String.valueOf(achado.getCavalos()));
+        ano.setText(String.valueOf(achado.getAno()));
+        tipo.setText(achado.getTipo());
+        nomeCarro.setText(achado.getNome());
+        if (achado.isUsado()) {
+            usado.setText("É usado");
+        }else{
+            usado.setText("É novo");
+        }
+        if (achado.getIsShowroom()) {
+            showroom.setText("É do showroom");
+        }else{
+            showroom.setText("Não é do showroom");
+        }
+    }
+
+
+    //busca cliente
+
+    @FXML
+    private TextArea cpfClientField;
+
+    @FXML
+    private TextField cpfSearchClient;
+
+    @FXML
+    private TextArea datanascimentoClient;
+
+    @FXML
+    private TextArea enderecoClient;
+
+    @FXML
+    private TextArea nomeClient;
+
+    @FXML
+    private Button searchButtonClient;
+
+    @FXML
+    void onClickButtonSearchClient(ActionEvent event) {
+        String cpfBusca = cpfSearchClient.getText();
+        Cliente achado = gerenciador.buscaCliente(cpfBusca);
+        cpfClientField.setText(achado.getCpf());
+        nomeClient.setText(achado.getNome());
+        datanascimentoClient.setText(achado.getDataNascimento().toString());
+        enderecoClient.setText(achado.getEndereco());
+    }
+
+
+    //busca funcionario
+
+    @FXML
+    private TextArea cpfEmplyField;
+
+    @FXML
+    private TextField cpfSearchEmply;
+
+    @FXML
+    private TextArea dataIngressoEmply;
+
+    @FXML
+    private TextArea datanascimentoEmply;
+
+    @FXML
+    private TextArea nomeEmply;
+
+    @FXML
+    private TextArea salarioEmply;
+
+    @FXML
+    private Button searchButtonEmply;
+
+    @FXML
+    void onClickButtonSearchEmply(ActionEvent event) {
+        String cpfBusca = cpfSearchEmply.getText();
+        Funcionario achado = gerenciador.buscaFuncionario(cpfBusca);
+        cpfEmplyField.setText(achado.getCpf());
+        nomeEmply.setText(achado.getNome());
+        datanascimentoEmply.setText(achado.getDataNascimento().toString());
+        dataIngressoEmply.setText(achado.getDataIngresso().toString());
+        salarioEmply.setText(String.format("R$ %.2f", achado.getSalario()));
     }
 
 
