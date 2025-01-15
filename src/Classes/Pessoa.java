@@ -8,7 +8,7 @@ public abstract class Pessoa {
     private String nome;
     private String cpf;
     private LocalDate dataNascimento;
-    private List<Carro> carrosVendidos; // Lista de carros vendidos
+    private List<Carro> carrosVendidos; 
 
     public Pessoa(String nome, String cpf,LocalDate dataNascimento) {
         this.nome = nome;
@@ -17,7 +17,6 @@ public abstract class Pessoa {
         this.carrosVendidos = new ArrayList<>();
     }
 
-    // Getters e setters para nome, cpf e dataNascimento
     public String getNome() {
         return nome;
     }
@@ -42,12 +41,11 @@ public abstract class Pessoa {
         this.dataNascimento = dataNascimento;
     }
 
-    // Método para adicionar um carro à lista de carros vendidos da pessoa
     public void adicionarCarroVendido(Carro carro) {
         this.carrosVendidos.add(carro);
     }
 
-    // Método para obter a lista de carros vendidos da pessoa
+  
     public List<Carro> getCarrosVendidos() {
         return carrosVendidos;
     }
