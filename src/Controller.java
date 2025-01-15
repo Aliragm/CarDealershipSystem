@@ -255,7 +255,18 @@ public class Controller {
 
     @FXML
     void onClickRemoveCarShow(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RemoveCarShowroom.fxml"));
+            Parent showroomRoot = loader.load();
 
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Showroom.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -316,6 +327,22 @@ public class Controller {
     @FXML
     void onClickEditCarReserve(ActionEvent event) {
 
+    }
+
+    @FXML
+    void onClickRemoveCarReserve(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RemoveCarReserve.fxml"));
+            Parent showroomRoot = loader.load();
+
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Reserve.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -384,7 +411,18 @@ public class Controller {
 
     @FXML
     void onClickRemoveClient(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RemoveClient.fxml"));
+            Parent addClientRoot = loader.load();
 
+            Controller addClientController = loader.getController();
+            addClientController.setMainWindow(mainWindow);
+            addClientController.fxmlStack = this.fxmlStack;
+            pushToStack("Client.fxml");
+            mainWindow.setScene(new Scene(addClientRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //Funcionarios
@@ -443,7 +481,18 @@ public class Controller {
 
     @FXML
     void onClickRemoveEmply(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("RemoveEmply.fxml"));
+            Parent showroomRoot = loader.load();
 
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Emply.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -730,4 +779,66 @@ public class Controller {
             System.out.println("Erro ao cadastrar funcionário: " + e.getMessage());
         }
     }
+
+    //Remover carro showroom
+
+    @FXML
+    private TextField chassiRemoveShowroom;
+
+    @FXML
+    private Button removeButtonCarShowroom;
+
+    @FXML
+    void onClickButtonRemoveCarShowroom(ActionEvent event) {
+        String chassi = chassiRemoveShowroom.getText();
+        gerenciador.removerCarro(chassi);
+        chassiRemoveShowroom.clear();
+    }
+
+    //remover carro reserva
+
+    @FXML
+    private TextField chassiRemoveReserve;
+
+    @FXML
+    private Button removeButtonCarReserve;
+
+    @FXML
+    void onClickButtonRemoveCarReserve(ActionEvent event) {
+        String chassi = chassiRemoveReserve.getText();
+        gerenciador.removerCarro(chassi);
+        chassiRemoveReserve.clear();
+    }
+
+    //Remover cliente
+
+    @FXML
+    private TextField cpfRemoveClient;
+
+    @FXML
+    private Button removeButtonClient;
+
+    @FXML
+    void onClickButtonRemoveClient(ActionEvent event) {
+        String cpf = cpfRemoveClient.getText();
+        gerenciador.removerCliente(cpf);
+        cpfRemoveClient.clear();
+    }
+
+    //remover funcionário
+
+    @FXML
+    private TextField cpfRemoveEmply;
+
+    @FXML
+    private Button removeButtonEmply;
+
+    @FXML
+    void onClickButtonRemoveEmply(ActionEvent event) {
+        String cpf = cpfRemoveEmply.getText();
+        gerenciador.removerFunc(cpf);
+        cpfRemoveEmply.clear();
+    }
+
+
 }

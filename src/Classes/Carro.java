@@ -1,7 +1,8 @@
 package Classes;
 
+import java.io.Serializable;
 
-public class Carro {
+public class Carro implements Serializable{
     private String marca;
     private String cor;
     private int cavalos;

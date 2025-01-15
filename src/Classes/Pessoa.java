@@ -1,10 +1,11 @@
 package Classes;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable{
     private String nome;
     private String cpf;
     private LocalDate dataNascimento;
