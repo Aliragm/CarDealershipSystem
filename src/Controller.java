@@ -845,5 +845,50 @@ public class Controller {
         cpfRemoveEmply.clear();
     }
 
+    //vender carro reserva
+    @FXML
+    private TextField chassiSellReserve;
+
+    @FXML
+    private TextField cpfClientSellReserve;
+
+    @FXML
+    private TextField cpfEmplySellReserve;
+
+    @FXML
+    private Button sellButtonCarReserve;
+
+    @FXML
+    void onClickButtonSellCarReserve(ActionEvent event) {
+        String chassi = chassiSellReserve.getText();
+        String cpfClient = cpfClientSellReserve.getText();
+        String cpfEmply = cpfEmplySellReserve.getText();
+
+        gerenciador.venderCarro(cpfEmply, cpfClient, chassi);
+    }
+
+    //vender carro showroom
+
+    @FXML
+    private TextField chassiSellShowroom;
+
+    @FXML
+    private TextField cpfClientSellShowroom;
+
+    @FXML
+    private TextField cpfEmplySellShowroom;
+
+    @FXML
+    private Button sellButtonCarShowroom;
+
+    @FXML
+    void onClickButtonSellCarShowroom(ActionEvent event) {
+        String chassi = chassiSellShowroom.getText();
+        String cpfClient = cpfClientSellShowroom.getText();
+        String cpfEmply = cpfEmplySellShowroom.getText();
+
+        gerenciador.venderCarro(cpfEmply, cpfClient, chassi);
+    }
+
 
 }

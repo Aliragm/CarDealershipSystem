@@ -168,6 +168,29 @@ public class Gerenciador {
         return cpfs;
     }
 
+    public void venderCarro(String cpfFunc, String cpfCliente, String chassi){
+        Carro carro = null;
+        for (Carro c : bancoDeDados.getCarros()) {
+            if (c.getChassi().equals(chassi)) {
+                carro = c;
+            }
+        }
+        for (Pessoa p : bancoDeDados.getPessoas()){
+            if (p instanceof Funcionario) {
+                if (p.getCpf().equals(cpfFunc)) {
+                    p.adicionarCarroVendido(carro);
+                }
+            }
+            else if(p instanceof Cliente){
+                if (p.getCpf().equals(cpfCliente)) {
+                    p.adicionarCarroVendido(carro);
+                    ((Cliente)p).aumentarFidelidade(1);
+                }
+            }
+        }
+        bancoDeDados.getCarros().remove(carro);
+    }
+
     private File diretorio = new File("src/arquivos/banco.prod");
 
     @SuppressWarnings("unchecked")
