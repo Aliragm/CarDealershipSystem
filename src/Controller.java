@@ -6,11 +6,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.util.Stack;
 
 import Classes.Gerenciador;
@@ -347,7 +349,7 @@ public class Controller {
             Controller showroomController = loader.getController();
             showroomController.setMainWindow(mainWindow);
             showroomController.fxmlStack = this.fxmlStack;
-            pushToStack("Cliente.fxml");
+            pushToStack("Client.fxml");
             mainWindow.setScene(new Scene(showroomRoot));
         } catch (Exception e) {
             e.printStackTrace();
@@ -355,8 +357,19 @@ public class Controller {
     }
 
     @FXML
-    void onClickAddClient(ActionEvent event) {
+    public void onClickAddClient(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ClientRegistry.fxml"));
+            Parent addClientRoot = loader.load();
 
+            Controller addClientController = loader.getController();
+            addClientController.setMainWindow(mainWindow);
+            addClientController.fxmlStack = this.fxmlStack;
+            pushToStack("Client.fxml");
+            mainWindow.setScene(new Scene(addClientRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -409,7 +422,18 @@ public class Controller {
 
     @FXML
     void onClickAddEmply(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("EmplyRegistry.fxml"));
+            Parent showroomRoot = loader.load();
 
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Emply.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -626,5 +650,84 @@ public class Controller {
     @FXML
     void usedCheckboxReserve(ActionEvent event) {
 
+    }
+
+    //cadastro clientes
+
+    @FXML
+    private TextField adressClient;
+
+    @FXML
+    private TextField cpfClient;
+
+    @FXML
+    private DatePicker dateClient;
+
+    @FXML
+    private TextField nameClient;
+
+    @FXML
+    private Button submitButtonClient;
+
+    void onClickButtonSubmitClient(ActionEvent event) {
+        try {
+            String nome = nameClient.getText();
+            String cpf = cpfClient.getText();
+            String endereco = adressClient.getText();
+            LocalDate dataNascimento = dateClient.getValue();
+
+            gerenciador.cadastroCliente(nome, cpf, dataNascimento, endereco);
+
+            System.out.println("Cliente cadastrado com sucesso!");
+
+            nameClient.clear();
+            cpfClient.clear();
+            adressClient.clear();
+            dateClient.setValue(null);
+
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar cliente: " + e.getMessage());
+        }
+    }
+
+    //cadastro funcionário
+
+    @FXML
+    private TextField cpfEmply;
+
+    @FXML
+    private DatePicker dateEmply;
+
+    @FXML
+    private TextField nameEmply;
+
+    @FXML
+    private Button submitButtonEmply;
+
+    @FXML
+    private TextField wageEmply;
+
+    @FXML
+    void onClickButtonSubmitEmply(ActionEvent event) {
+        try {
+            
+            String nome = nameEmply.getText();
+            String cpf = cpfEmply.getText();
+            LocalDate dataNascimento = dateEmply.getValue();
+            double salario = Double.parseDouble(wageEmply.getText());
+            LocalDate dataIngresso = LocalDate.now();
+
+            gerenciador.cadastroFunc(nome, cpf, dataNascimento, salario, dataIngresso);
+    
+            System.out.println("Funcionário cadastrado com sucesso!");
+    
+            nameEmply.clear();
+            cpfEmply.clear();
+            wageEmply.clear();
+            dateEmply.setValue(null);
+    
+        } catch (Exception e) {
+            System.out.println("Erro ao cadastrar funcionário: " + e.getMessage());
+        }
     }
 }
