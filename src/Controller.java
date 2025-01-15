@@ -276,7 +276,18 @@ public class Controller {
 
     @FXML
     void onClickSellCarShowButton(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SellShowroom.fxml"));
+            Parent showroomRoot = loader.load();
 
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Showroom.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -352,7 +363,18 @@ public class Controller {
 
     @FXML
     void onClickSellCarReserveButton(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SellReserve.fxml"));
+            Parent showroomRoot = loader.load();
 
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Reserve.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //Clientes
