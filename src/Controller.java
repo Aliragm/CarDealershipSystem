@@ -439,7 +439,7 @@ public class Controller {
     @FXML
     public void onClickAddClientNew(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ClientRegistryNew.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("registroCliente.fxml"));
             Parent showroomRoot = loader.load();
 
             Controller showroomController = loader.getController();
@@ -454,7 +454,18 @@ public class Controller {
 
     @FXML
     void onClickBuyedRegistrationButton(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("sellsClient.fxml"));
+            Parent showroomRoot = loader.load();
 
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Client.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -774,40 +785,42 @@ public class Controller {
     //cadastro clientes
 
     @FXML
-    private TextField adressClient;
+    private Button botaoSubmeterCliente;
 
     @FXML
-    private TextField cpfClient;
+    private TextField cpfCliente;
 
     @FXML
-    private DatePicker dateClient;
+    private DatePicker dataCliente;
 
     @FXML
-    private TextField nameClient;
+    private TextField enderecoCliente;
 
     @FXML
-    private Button submitButtonClient;
+    private TextField nomeCliente;
 
-    void onClickButtonSubmitClient(ActionEvent event) {
+    @FXML
+    void mandarFormularioCliente(ActionEvent event) {
         try {
-            String nome = nameClient.getText();
-            String cpf = cpfClient.getText();
-            String endereco = adressClient.getText();
-            LocalDate dataNascimento = dateClient.getValue();
+            String nome = nomeCliente.getText();
+            String cpf = cpfCliente.getText();
+            String endereco = enderecoCliente.getText();
+            LocalDate dataNascimento = dataCliente.getValue();
 
             gerenciador.cadastroCliente(nome, cpf, dataNascimento, endereco);
 
             System.out.println("Cliente cadastrado com sucesso!");
 
-            nameClient.clear();
-            cpfClient.clear();
-            adressClient.clear();
-            dateClient.setValue(null);
+            nomeCliente.clear();
+            cpfCliente.clear();
+            enderecoCliente.clear();
+            dataCliente.setValue(null);
 
         } catch (Exception e) {
             System.out.println("Erro ao cadastrar cliente: " + e.getMessage());
         }
     }
+
 
     //cadastro funcionário
 
@@ -930,6 +943,10 @@ public class Controller {
         String cpfEmply = cpfEmplySellReserve.getText();
 
         gerenciador.venderCarro(cpfEmply, cpfClient, chassi);
+
+        chassiSellReserve.clear();
+        cpfClientSellReserve.clear();
+        cpfEmplySellReserve.clear();
     }
 
     //vender carro showroom
@@ -953,6 +970,9 @@ public class Controller {
         String cpfEmply = cpfEmplySellShowroom.getText();
 
         gerenciador.venderCarro(cpfEmply, cpfClient, chassi);
+        chassiSellShowroom.clear();
+        cpfClientSellShowroom.clear();
+        cpfEmplySellShowroom.clear();
     }
 
     //busca carro
@@ -1104,6 +1124,39 @@ public class Controller {
         for (Carro c : carrosVendidos) {
             selledListEmply.appendText("Nome: " + c.getNome() + ", Chassi: " + c.getChassi() + "\n");
         }
+    }
+
+    //compras clientes
+
+    @FXML
+    private TextField cpfSearchClientSells;
+
+    @FXML
+    private Button searchButtonClientSells;
+
+    @FXML
+    private TextArea selledListClient;
+
+    @FXML
+    void onClickButtonSearchClientSells(ActionEvent event) {
+        selledListClient.clear();
+        Cliente achado = gerenciador.buscaCliente(cpfSearchClientSells.getText());
+
+        if (achado == null) {
+            selledListClient.setText("Cliente não encontrado.");
+            return;
+        }
+
+        List<Carro> carrosVendidos = achado.getCarrosVendidos();
+        if (carrosVendidos == null || carrosVendidos.isEmpty()) {
+            selledListClient.setText("Este cliente ainda não comprou nenhum carro.");
+            return;
+        }
+
+        for (Carro c : carrosVendidos) {
+            selledListClient.appendText("Nome: " + c.getNome() + ", Chassi: " + c.getChassi() + "\n");
+        }
+        selledListClient.appendText("Fidelidade: " + achado.getFidelidade() + " pontos");
     }
 
 }
