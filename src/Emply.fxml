@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <Text layoutX="194.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Funcionarios" textAlignment="CENTER">
+         <font>
+            <Font name="Avenir Next Regular" size="36.0" />
+         </font>
+      </Text>
+      <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBack" text="Voltar" />
+      <Button fx:id="addEmplyButton" layoutX="110.0" layoutY="183.0" mnemonicParsing="false" onAction="#onClickAddEmply" prefHeight="35.0" prefWidth="100.0" text="Adicionar" />
+      <Button fx:id="removeEmplyButton" layoutX="250.0" layoutY="183.0" mnemonicParsing="false" onAction="#onClickRemoveEmply" prefHeight="35.0" prefWidth="100.0" text="Remover" />
+      <Button fx:id="SelledRegistrationButton" layoutX="390.0" layoutY="183.0" mnemonicParsing="false" onAction="#onClickSelledRegistrationButton" prefHeight="35.0" prefWidth="100.0" text="Registro de vendas">
+         <font>
+            <Font size="10.0" />
+         </font></Button>
+      <Button fx:id="editEmplyButton" layoutX="110.0" layoutY="245.0" mnemonicParsing="false" onAction="#onClickEditEmply" prefHeight="35.0" prefWidth="100.0" text="Buscar" />
+      <Button fx:id="listEmplyButton" layoutX="390.0" layoutY="245.0" mnemonicParsing="false" onAction="#onClickListEmply" prefHeight="35.0" prefWidth="100.0" text="Listar" />
+   </children>
+</AnchorPane>

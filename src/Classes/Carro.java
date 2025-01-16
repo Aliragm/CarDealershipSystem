@@ -1,7 +1,8 @@
 package Classes;
 
+import java.io.Serializable;
 
-public class Carro {
+public class Carro implements Serializable{
     private String marca;
     private String cor;
     private int cavalos;
@@ -10,9 +11,10 @@ public class Carro {
     private String nome;
     private boolean isUsado;
     private boolean isShowroom; 
+    private String chassi;
     
 
-    public Carro(String marca, String cor, int cavalos, int ano, String tipo, String nome, boolean isUsado, boolean isShowroom) {
+    public Carro(String marca, String cor, int cavalos, int ano, String tipo, String nome, boolean isUsado, boolean isShowroom, String chassi) {
         this.marca = marca;
         this.cor = cor;
         this.cavalos = cavalos;
@@ -21,9 +23,18 @@ public class Carro {
         this.nome = nome;
         this.isUsado = isUsado;
         this.isShowroom = isShowroom;
+        this.chassi = chassi;
     }
 
-    
+    public String getChassi() {
+        return chassi;
+    }
+
+
+    public void setChassi(String chassi) {
+        this.chassi = chassi;
+    }
+
     public String getMarca() {
         return marca;
     }

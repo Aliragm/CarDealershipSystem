@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <Button fx:id="backButton" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#onClickBack" text="Voltar" />
+      <Text layoutX="182.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Cliente">
+         <font>
+            <Font name="Avenir Next Regular" size="36.0" />
+         </font>
+      </Text>
+      <TextField fx:id="cpfSearchClient" layoutX="88.0" layoutY="79.0" prefHeight="32.0" prefWidth="425.0" promptText="Cpf" />
+      <Text layoutX="29.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cpf">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Button fx:id="searchButtonClient" layoutX="522.0" layoutY="79.0" mnemonicParsing="false" onAction="#onClickButtonSearchClient" prefHeight="32.0" prefWidth="64.0" text="Buscar">
+         <font>
+            <Font name="Avenir Next Bold" size="14.0" />
+         </font>
+      </Button>
+      <TextArea fx:id="nomeClient" layoutX="88.0" layoutY="127.0" prefHeight="43.0" prefWidth="202.0" text="Nome">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextArea>
+      <TextArea fx:id="cpfClientField" layoutX="310.0" layoutY="127.0" prefHeight="44.0" prefWidth="202.0" text="Cpf">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextArea>
+      <TextArea fx:id="datanascimentoClient" layoutX="88.0" layoutY="178.0" prefHeight="43.0" prefWidth="202.0" text="Data de nascimento">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextArea>
+      <TextArea fx:id="enderecoClient" layoutX="310.0" layoutY="178.0" prefHeight="43.0" prefWidth="202.0" text="Endereco">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextArea>
+   </children>
+</AnchorPane>

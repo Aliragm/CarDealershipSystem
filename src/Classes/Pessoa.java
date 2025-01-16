@@ -1,16 +1,17 @@
 package Classes;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable{
     private String nome;
     private String cpf;
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
     private List<Carro> carrosVendidos; // Lista de carros vendidos
 
-    public Pessoa(String nome, String cpf, Date dataNascimento) {
+    public Pessoa(String nome, String cpf,LocalDate dataNascimento) {
         this.nome = nome;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
@@ -34,11 +35,11 @@ public abstract class Pessoa {
         this.cpf = cpf;
     }
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

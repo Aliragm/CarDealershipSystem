@@ -1,12 +1,12 @@
 package Classes;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Funcionario extends Pessoa {
     private double salario;
-    private Date dataIngresso;
+    private LocalDate dataIngresso;
 
-    public Funcionario(String nome, String cpf, Date dataNascimento, double salario, Date dataIngresso) {
+    public Funcionario(String nome, String cpf, LocalDate dataNascimento, double salario, LocalDate dataIngresso) {
         super(nome, cpf, dataNascimento);
         this.salario = salario;
         this.dataIngresso = dataIngresso;
@@ -21,11 +21,11 @@ public class Funcionario extends Pessoa {
         this.salario = salario;
     }
 
-    public Date getDataIngresso() {
+    public LocalDate getDataIngresso() {
         return dataIngresso;
     }
 
-    public void setDataIngresso(Date dataIngresso) {
+    public void setDataIngresso(LocalDate dataIngresso) {
         this.dataIngresso = dataIngresso;
     }
 }
