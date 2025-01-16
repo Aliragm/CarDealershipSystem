@@ -14,12 +14,15 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 import Classes.Carro;
 import Classes.Cliente;
 import Classes.Funcionario;
 import Classes.Gerenciador;
+import Classes.Pessoa;
 
 public class Controller {
 
@@ -572,80 +575,75 @@ public class Controller {
 
     @FXML
     void onClickSelledRegistrationButton(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("sellsEmply.fxml"));
+            Parent showroomRoot = loader.load();
 
+            Controller showroomController = loader.getController();
+            showroomController.setMainWindow(mainWindow);
+            showroomController.fxmlStack = this.fxmlStack;
+            pushToStack("Emply.fxml");
+            mainWindow.setScene(new Scene(showroomRoot));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     //listar showroom
 
+    @FXML
+    private TextArea listCarShowroom;
 
     @FXML
-    private ListView<String> listViewChassi;
-
-    @FXML
-    private ListView<String> listViewName;
-
-    @FXML
-    void initializeChassi() {
-        listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getChassisShowroom()));
-    }
-
-    @FXML
-    void initializeName() {
-        listViewName.setItems(FXCollections.observableArrayList(gerenciador.getNomesShowroom()));
+    void onClickShowListCarShowroom(ActionEvent event) {
+        for (Carro c : gerenciador.getBancoDeDados().getCarros()) {
+            if (c.getIsShowroom()) {
+                listCarShowroom.appendText("Nome: " + c.getNome() + " - " + "Chassi: " + c.getChassi() + "\n");
+            }
+        }
     }
 
     //Lista reserva
 
     @FXML
-    private ListView<String> listViewChassiReserva;
+    private TextArea listCarReserve;
 
     @FXML
-    private ListView<String> listViewNameReserva;
-
-    @FXML
-    void initializeChassiReserva() {
-        listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getChassisReserva()));
-    }
-
-    @FXML
-    void initializeNameReserva() {
-        listViewName.setItems(FXCollections.observableArrayList(gerenciador.getNomesReserva()));
+    void onClickShowListCarReserve(ActionEvent event) {
+        for (Carro c : gerenciador.getBancoDeDados().getCarros()) {
+            if (!c.getIsShowroom()) {
+                listCarReserve.appendText("Nome: " + c.getNome() + " - " + "Chassi: " + c.getChassi() + "\n");
+            }
+        }
     }
 
     //Lista clientes
 
     @FXML
-    private ListView<String> listViewCpfClients;
+    private TextArea listClient;
 
     @FXML
-    private ListView<String> listViewNameClients;
-
-    @FXML
-    void initializeCpfClients() {
-        listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getCpfClientes()));
+    void onClickShowListClient(ActionEvent event) {
+        for (Pessoa p : gerenciador.getBancoDeDados().getPessoas()) {
+            if (p instanceof Cliente) {
+                listClient.appendText("Nome: " + p.getNome() + " - " + "Cpf: " + p.getCpf() + "\n");
+            }
+        }
     }
 
-    @FXML
-    void initializeNameClients() {
-        listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getNomesClientes()));
-    }
 
     //Lista funcionarios
 
     @FXML
-    private ListView<String> listViewCpfEmply;
+    private TextArea listEmply;
 
     @FXML
-    private ListView<String> listViewNameEmply;
-
-    @FXML
-    void initializeCpfEmply() {
-        listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getCpfFuncionarios()));
-    }
-
-    @FXML
-    void initializeNameEmply() {
-        listViewChassi.setItems(FXCollections.observableArrayList(gerenciador.getNomesFuncionarios()));
+    void onClickShowListEmply(ActionEvent event) {
+        for (Pessoa p : gerenciador.getBancoDeDados().getPessoas()) {
+            if (p instanceof Funcionario) {
+                listEmply.appendText("Nome: " + p.getNome() + " - " + "Cpf: " + p.getCpf() + "\n");
+            }
+        }
     }
 
     //cadastro carro showroom
@@ -1079,5 +1077,36 @@ public class Controller {
         salarioEmply.setText(String.format("R$ %.2f", achado.getSalario()));
     }
 
+    //vendas funcionario
+
+    @FXML
+    private TextField cpfSearchEmplySells;
+
+    @FXML
+    private TextArea selledListEmply;
+
+    @FXML
+    private Button searchButtonEmplySells;
+
+    @FXML
+    void onClickButtonSearchEmplySells(ActionEvent event) {
+        selledListEmply.clear();
+        Funcionario achado = gerenciador.buscaFuncionario(cpfSearchEmplySells.getText());
+
+        if (achado == null) {
+            selledListEmply.setText("Funcionário não encontrado.");
+            return;
+        }
+
+        List<Carro> carrosVendidos = achado.getCarrosVendidos();
+        if (carrosVendidos == null || carrosVendidos.isEmpty()) {
+            selledListEmply.setText("Este funcionário ainda não vendeu nenhum carro.");
+            return;
+        }
+
+        for (Carro c : carrosVendidos) {
+            selledListEmply.appendText("Nome: " + c.getNome() + ", Chassi: " + c.getChassi() + "\n");
+        }
+    }
 
 }
